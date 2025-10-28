@@ -10,6 +10,7 @@
     },
     "require": {
         "php": "^7.0||^8.0",
+        "intouch/newrelic": "^2.0",
         "psr/log": "^1.0",
         "subjective-php/psr-log-helper": "^3.0"
     },
