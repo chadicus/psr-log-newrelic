@@ -2,6 +2,8 @@
 
 namespace SubjectivePHPTest\Psr\Log;
 
+use Intouch\Newrelic\Newrelic;
+use PHPUnit\Framework\TestCase;
 use SubjectivePHP\Psr\Log\NewRelicLogger;
 use Psr\Log\LogLevel;
 
@@ -10,7 +12,7 @@ use Psr\Log\LogLevel;
  * @covers ::__construct
  * @covers ::<private>
  */
-final class NewRelicLoggerTest extends \PHPUnit\Framework\TestCase
+final class NewRelicLoggerTest extends TestCase
 {
     /**
      * @test
@@ -54,7 +56,7 @@ final class NewRelicLoggerTest extends \PHPUnit\Framework\TestCase
      */
     public function logIgnoredLevel()
     {
-        $newRelicAgentMock = $this->getMockBuilder('\\SobanVuex\\NewRelic\\Agent')->getMock();
+        $newRelicAgentMock = $this->getMockBuilder(Newrelic::class)->getMock();
         $newRelicAgentMock->expects($this->exactly(0))->method('addCustomParameter');
         $newRelicAgentMock->expects($this->exactly(0))->method('noticeError');
         $logger = new NewRelicLogger($newRelicAgentMock);
@@ -112,15 +114,7 @@ final class NewRelicLoggerTest extends \PHPUnit\Framework\TestCase
         array $callParams,
         \Exception $exception = null
     ) {
-        $builder = $this->getMockBuilder('\\SobanVuex\\NewRelic\\Agent');
-        list($majorVersion) = explode('.', \PhpUnit\Runner\Version::id());
-        if ($majorVersion < 9) {
-            $builder->setMethods(['addCustomParameter', 'noticeError']);
-        } else {
-            $builder->onlyMethods(['addCustomParameter', 'noticeError']);
-        }
-
-        $newRelicAgentMock = $builder->getMock();
+        $newRelicAgentMock = $this->getMockBuilder(Newrelic::class)->getMock();
         $consecutiveKeyValues = [['level', $level]];
         foreach ($parameters as $key => $value) {
             $consecutiveKeyValues[] = [$key, $value];

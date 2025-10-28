@@ -2,10 +2,11 @@
 
 namespace SubjectivePHP\Psr\Log;
 
+use Intouch\Newrelic\Newrelic;
 use Psr\Log\AbstractLogger;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
-use SobanVuex\NewRelic\Agent;
+
 
 /**
  * PSR-3 Implementation using NewRelic.
@@ -20,7 +21,7 @@ final class NewRelicLogger extends AbstractLogger implements LoggerInterface
     /**
      * NewRelic Agent implementation.
      *
-     * @var Agent
+     * @var Newrelic
      */
     private $newRelicAgent;
 
@@ -44,10 +45,10 @@ final class NewRelicLogger extends AbstractLogger implements LoggerInterface
     /**
      * Construct a new instance of the logger.
      *
-     * @param Agent $newRelicAgent  NewRelic Agent implementation.
-     * @param array $observedLevels Array of log levels which should be reported to new relic.
+     * @param Newrelic $newRelicAgent  NewRelic Agent implementation.
+     * @param array    $observedLevels Array of log levels which should be reported to new relic.
      */
-    public function __construct(Agent $newRelicAgent, array $observedLevels = self::DEFAULT_OBSERVED_LEVELS)
+    public function __construct(Newrelic $newRelicAgent, array $observedLevels = self::DEFAULT_OBSERVED_LEVELS)
     {
         $this->newRelicAgent = $newRelicAgent;
         $this->observedLevels = $observedLevels;
