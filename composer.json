@@ -11,7 +11,6 @@
     "require": {
         "php": "^7.0||^8.0",
         "psr/log": "^1.0",
-        "sobanvuex/php-newrelic": "^2.0",
         "subjective-php/psr-log-helper": "^3.0"
     },
     "require-dev": {
