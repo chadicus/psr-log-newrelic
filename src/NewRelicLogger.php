@@ -7,7 +7,6 @@ use Psr\Log\AbstractLogger;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 
-
 /**
  * PSR-3 Implementation using NewRelic.
  */
